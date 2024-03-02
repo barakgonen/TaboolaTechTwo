@@ -34,11 +34,21 @@ public class Utils {
             while (!input.isEmpty()) {
                 temp.add(input.pop());
             }
+
+            boolean gotRightOpeningParenthesis = false;
             // HANDLE PARENTHESIS
-            while (!temp.isEmpty() && !temp.peek().equals("(")) {
-                input.add(temp.pop());
+            while (!temp.isEmpty() && !gotRightOpeningParenthesis) {
+                var v = temp.pop();
+                if (v.equals("(")) {
+                    if (!temp.contains("(")) {
+                        gotRightOpeningParenthesis = true;
+                    } else {
+                        input.add(v);
+                    }
+                } else {
+                    input.add(v);
+                }
             }
-            temp.pop();
 
             List<String> splittedExpression = new ArrayList<>();
             while (!temp.isEmpty() && !temp.peek().equals(")")) {

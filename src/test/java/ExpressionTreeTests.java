@@ -1,4 +1,3 @@
-import org.example.AbstractSyntaxTree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,135 +7,62 @@ public class ExpressionTreeTests {
 
     @Test
     public void testSingleValueExpression() {
-//        Integer expectedInt = 5;
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree(String.valueOf(expectedInt));
-//
-//        Assertions.assertEquals(5, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5, Utils.calculateExpression("5"));
     }
 
     @Test
     public void testSimpleExpressionTreePlus() {
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree("5 + 3");
-
-//        Assertions.assertEquals(8, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 + 3, Utils.calculateExpression("5 + 3"));
-
-//        abstractSyntaxTree = new AbstractSyntaxTree("5 + 3 + 1");
-
-//        Assertions.assertEquals(5 + 3 + 1, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 + 3 + 1, Utils.calculateExpression("5 + 3 + 1"));
-
-//        abstractSyntaxTree = new AbstractSyntaxTree("15 + 13");
-//
-//        Assertions.assertEquals(15 + 13, abstractSyntaxTree.solve().get().intValue());
-
         Assertions.assertEquals(15 + 13, Utils.calculateExpression("15 + 13"));
     }
 
     @Test
     public void testSimpleExpressionTreeMinus() {
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree("5 - 3");
-//
-//        Assertions.assertEquals(2, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 - 3, Utils.calculateExpression("5 - 3"));
     }
 
     @Test
     public void testSimpleExpressionTreeDiv() {
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree("5 / 3");
-
-//        Assertions.assertEquals(5 / 3, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 / 3, Utils.calculateExpression("5 / 3"));
     }
 
     @Test
     public void testSimpleExpressionTreeMul() {
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree("5 * 3");
-
-//        Assertions.assertEquals(15, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 * 3, Utils.calculateExpression("5 * 3"));
     }
 
     @Test
     public void testSimpleExpressionWithParentheses() {
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree("(5 + 3)");
-
-//        Assertions.assertEquals(8, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(8, Utils.calculateExpression("8"));
     }
 
     @Test
     public void testComplexExpressionTreePlus() {
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree("5 + (3 + 1) * 4");
-//        Assertions.assertEquals(5 + (3 + 1) * 4, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 + (3 + 1) * 4, Utils.calculateExpression("5 + (3 + 1) * 4"));
-//
-//        abstractSyntaxTree = new AbstractSyntaxTree("5 + (3 + 1)");
-//        Assertions.assertEquals(5 + (3 + 1), abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 + (3 + 1), Utils.calculateExpression("5 + (3 + 1)"));
-//
-//        abstractSyntaxTree = new AbstractSyntaxTree("4 * (2 + 1)");
-//        Assertions.assertEquals(4 * (2 + 1), abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(4 * (2 + 1), Utils.calculateExpression("4 * (2 + 1)"));
-//        abstractSyntaxTree = new AbstractSyntaxTree("5 + ((3 + 1) + 2)");
-//
-//        Assertions.assertEquals(5 + ((3 + 1) + 2), abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 + ((3 + 1) + 2), Utils.calculateExpression("5 + ((3 + 1) + 2)"));
-//
-//        abstractSyntaxTree = new AbstractSyntaxTree("(5 + 3) * 10");
-//
-//        Assertions.assertEquals((5 + 3) * 10, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals((5 + 3) * 10, Utils.calculateExpression("(5 + 3) * 10"));
-//
-//        abstractSyntaxTree = new AbstractSyntaxTree("5 + 3 * 10");
-//
-//        Assertions.assertEquals(5 + 3 * 10, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 + 3 * 10, Utils.calculateExpression("5 + 3 * 10"));
-//
-//        abstractSyntaxTree = new AbstractSyntaxTree("5 + (3 * 10)");
-//
-//        Assertions.assertEquals(5 + 3 * 10, abstractSyntaxTree.solve().get().intValue());
-//        Assertions.assertEquals(5 + (3 * 10), abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 + (3 * 10), Utils.calculateExpression("5 + (3 * 10)"));
-//        abstractSyntaxTree = new AbstractSyntaxTree("(3 + 1) * 4");
-//
-//        Assertions.assertEquals((3 + 1) * 4, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals((3 + 1) * 4, Utils.calculateExpression("(3 + 1) * 4"));
-//        abstractSyntaxTree = new AbstractSyntaxTree("5 + 4 * (2 + 1) + 3");
-//        Assertions.assertEquals(5 + 4 * (2 + 1) + 3, abstractSyntaxTree.solve().get().intValue());
         Assertions.assertEquals(5 + 4 * (2 + 1) + 3, Utils.calculateExpression("5 + 4 * (2 + 1) + 3"));
-//
-//        abstractSyntaxTree = new AbstractSyntaxTree("5 + 3 + (2 + 1) * 4");
-//        Assertions.assertEquals(5 + 3 + (2 + 1) * 4, abstractSyntaxTree.solve().get().intValue());
-
         Assertions.assertEquals(5 + 3 + (2 + 1) * 4, Utils.calculateExpression("5 + 3 + (2 + 1) * 4"));
     }
 
     @Test
     public void testComplexExpressionTreeMinus() {
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree("(5 - 3) - (4 - 1)");
-//
-//        Assertions.assertEquals((5 - 3) - (4 - 1), abstractSyntaxTree.solve());
-
         Assertions.assertEquals((5 - 3) - (4 - 1), Utils.calculateExpression("(5 - 3) - (4 - 1)"));
     }
 
     @Test
     public void testComplexExpressionTreeDiv() {
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree("4 - (5 / 3)");
-//
-//        Assertions.assertEquals(4 - (5 / 3), abstractSyntaxTree.solve());
-
         Assertions.assertEquals(4 - (5 / 3), Utils.calculateExpression("4 - (5 / 3)"));
     }
 
     @Test
     public void testComplexExpressionTreeMul() {
-//        AbstractSyntaxTree abstractSyntaxTree = new AbstractSyntaxTree("(5 * 3) + 5");
-//
-//        Assertions.assertEquals(20, abstractSyntaxTree.solve().get().intValue());
-
         Assertions.assertEquals((5 * 3) + 5, Utils.calculateExpression("(5 * 3) + 5"));
     }
 
@@ -231,6 +157,40 @@ public class ExpressionTreeTests {
     @Test
     public void testWithStack() {
         Assertions.assertEquals(5 + 4 * (2 + 1) + 3, Utils.calculateExpression("5 + 4 * (2 + 1) + 3"));
+    }
+
+    @Test
+    public void testGeneratedExpressions() {
+        Assertions.assertEquals((5 + 3) * 2, Utils.calculateExpression("(5 + 3) * 2"));
+        Assertions.assertEquals(10 - (4 * 2), Utils.calculateExpression("10 - (4 * 2)"));
+        Assertions.assertEquals(6 / (2 + 1), Utils.calculateExpression("6 / (2 + 1)"));
+        Assertions.assertEquals(8 - 3 / 4, Utils.calculateExpression("8 - 3 / 4"));
+        Assertions.assertEquals((8 - 3) / 4, Utils.calculateExpression("(8 - 3) / 4"));
+        Assertions.assertEquals((((5 + 3) * (2 - 1)) + (4 / 2)), Utils.calculateExpression("(((5 + 3) * (2 - 1)) + (4 / 2))"));
+        Assertions.assertEquals((((10 / 2) + (4 * 3)) - (6 / 2)), Utils.calculateExpression("(((10 / 2) + (4 * 3)) - (6 / 2))"));
+        Assertions.assertEquals((((6 * 2) - (4 + 1)) * (7 - 3)), Utils.calculateExpression("(((6 * 2) - (4 + 1)) * (7 - 3))"));
+        Assertions.assertEquals(((((8 / 2) * 3) - 5) + (9 / 3)), Utils.calculateExpression("((((8 / 2) * 3) - 5) + (9 / 3))"));
+        Assertions.assertEquals((((7 + 2) / (3 - 1)) * (4 + 2)), Utils.calculateExpression("(((7 + 2) / (3 - 1)) * (4 + 2))"));
+        Assertions.assertEquals((((9 * 2) + (4 / 2)) - (5 / 1)), Utils.calculateExpression("(((9 * 2) + (4 / 2)) - (5 / 1))"));
+        Assertions.assertEquals((((4 - 1) * (5 + 2)) + (10 / 5)), Utils.calculateExpression("(((4 - 1) * (5 + 2)) + (10 / 5))"));
+        Assertions.assertEquals((((10 / 2) * (5 - 1)) - (8 / 4)), Utils.calculateExpression("(((10 / 2) * (5 - 1)) - (8 / 4))"));
+        Assertions.assertEquals((((8 * 2) - (6 / 2)) * (7 + 3)), Utils.calculateExpression("(((8 * 2) - (6 / 2)) * (7 + 3))"));
+        Assertions.assertEquals((((7 + 3) / (2 - 1)) + (6 * 2)), Utils.calculateExpression("(((7 + 3) / (2 - 1)) + (6 * 2))"));
+        Assertions.assertEquals(((((6 * 3) + 2) / 4) * (5 - 1)), Utils.calculateExpression("((((6 * 3) + 2) / 4) * (5 - 1))"));
+        Assertions.assertEquals((((5 + 2) * (9 / 3)) + (4 / 2)), Utils.calculateExpression("(((5 + 2) * (9 / 3)) + (4 / 2))"));
+        Assertions.assertEquals((((4 - 1) * (6 + 2)) - (10 / 5)), Utils.calculateExpression("(((4 - 1) * (6 + 2)) - (10 / 5))"));
+        Assertions.assertEquals((((10 / 2) + (4 * 3)) / (6 - 3)), Utils.calculateExpression("(((10 / 2) + (4 * 3)) / (6 - 3))"));
+        Assertions.assertEquals((((6 * 2) - (4 + 1)) * (7 + 3)), Utils.calculateExpression("(((6 * 2) - (4 + 1)) * (7 + 3))"));
+        Assertions.assertEquals(((((8 / 2) * 3) - 5) + (9 / 3)), Utils.calculateExpression("((((8 / 2) * 3) - 5) + (9 / 3))"));
+        Assertions.assertEquals((((7 + 2) / (3 - 1)) * (4 + 2)), Utils.calculateExpression("(((7 + 2) / (3 - 1)) * (4 + 2))"));
+        Assertions.assertEquals((((9 * 2) + (4 / 2)) - (5 / 1)), Utils.calculateExpression("(((9 * 2) + (4 / 2)) - (5 / 1))"));
+        Assertions.assertEquals((((4 - 1) * (5 + 2)) + (10 / 5)), Utils.calculateExpression("(((4 - 1) * (5 + 2)) + (10 / 5))"));
+        Assertions.assertEquals((((10 / 2) * (5 - 1)) - (8 / 4)), Utils.calculateExpression("(((10 / 2) * (5 - 1)) - (8 / 4))"));
+        Assertions.assertEquals((((8 * 2) - (6 / 2)) * (7 + 3)), Utils.calculateExpression("(((8 * 2) - (6 / 2)) * (7 + 3))"));
+        Assertions.assertEquals((((7 + 3) / (2 - 1)) + (6 * 2)), Utils.calculateExpression("(((7 + 3) / (2 - 1)) + (6 * 2))"));
+        Assertions.assertEquals(((((6 * 3) + 2) / 4) * (5 - 1)), Utils.calculateExpression("((((6 * 3) + 2) / 4) * (5 - 1))"));
+        Assertions.assertEquals((((5 + 2) * (9 / 3)) + (4 / 2)), Utils.calculateExpression("(((5 + 2) * (9 / 3)) + (4 / 2))"));
+        Assertions.assertEquals((((4 - 1) * (6 + 2)) - (10 / 5)), Utils.calculateExpression("(((4 - 1) * (6 + 2)) - (10 / 5))"));
     }
 
 }
