@@ -1,10 +1,14 @@
+import jdk.jfr.Description;
 import org.example.Expression;
 import org.example.InvalidSyntaxException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -12,8 +16,68 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 public class ExpressionTests {
     @ParameterizedTest
     @MethodSource("expectedResultToExpressionStr")
-    void monthNames(int expectedResult, String expression) throws InvalidSyntaxException {
+    public void testImmediateValueExpressions(int expectedResult, String expression) throws InvalidSyntaxException {
         Assertions.assertEquals(expectedResult, new Expression(expression).solve());
+    }
+
+    @Test
+    @Description("Pre increment operator increments the value immediately and return the incremented value")
+    public void testPreIncrementPlusOperator() throws InvalidSyntaxException {
+        Map<String, Long> variableToValue = new HashMap<>() {{
+            put("i", 1L);
+        }};
+        String expression = "++i";
+
+        Long actualResult = new Expression(variableToValue, expression).solve();
+
+        Assertions.assertEquals(2, actualResult);
+        Assertions.assertEquals(variableToValue.size(), 1);
+        Assertions.assertEquals(2, variableToValue.get("i"));
+    }
+
+    @Test
+    @Description("Pos increment operator increments the value immediately and returns the value before being incremented")
+    public void testPostIncrementPlusOperator() throws InvalidSyntaxException {
+        Map<String, Long> variableToValue = new HashMap<>() {{
+            put("i", 1L);
+        }};
+        String expression = "i++";
+
+        Long actualResult = new Expression(variableToValue, expression).solve();
+
+        Assertions.assertEquals(1, actualResult);
+        Assertions.assertEquals(variableToValue.size(), 1);
+        Assertions.assertEquals(2, variableToValue.get("i"));
+    }
+
+    @Test
+    @Description("Pre increment operator increments the value immediately and return the incremented value")
+    public void testPreIncrementMinusOperator() throws InvalidSyntaxException {
+        Map<String, Long> variableToValue = new HashMap<>() {{
+            put("i", 1L);
+        }};
+        String expression = "--i";
+
+        Long actualResult = new Expression(variableToValue, expression).solve();
+
+        Assertions.assertEquals(0, actualResult);
+        Assertions.assertEquals(variableToValue.size(), 1);
+        Assertions.assertEquals(0, variableToValue.get("i"));
+    }
+
+    @Test
+    @Description("Pos increment operator increments the value immediately and returns the value before being incremented")
+    public void testPostIncrementMinusOperator() throws InvalidSyntaxException {
+        Map<String, Long> variableToValue = new HashMap<>() {{
+            put("i", 1L);
+        }};
+        String expression = "i--";
+
+        Long actualResult = new Expression(variableToValue, expression).solve();
+
+        Assertions.assertEquals(1, actualResult);
+        Assertions.assertEquals(variableToValue.size(), 1);
+        Assertions.assertEquals(0, variableToValue.get("i"));
     }
 
     private static Stream<Arguments> expectedResultToExpressionStr() {

@@ -5,23 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82414b0e-049a-4c35-9f14-7acd8339d836" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Equation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/EquationSolution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Expression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/InvalidSyntaxException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ExpressionTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ExpressionsWithVariablesCalculatorTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/VariableSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/VariableSourceProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/AbstractSyntaxTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/AbstractSyntaxTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Equation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Equation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/EquationSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/EquationSolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Expression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ExpressionTreeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ExpressionTreeTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ExpressionTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ExpressionTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ExpressionTreeTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ExpressionsWithVariablesCalculatorTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ExpressionsWithVariablesCalculatorTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Utils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/VariableSource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/VariableSourceProvider.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +41,17 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="TaboolaTechSecond" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="TaboolaTechSecond" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="TaboolaTechSecond" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -82,8 +89,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Gradle.ExpressionTests.executor": "Debug",
+    "Gradle.ExpressionTests.executor": "Run",
     "Gradle.ExpressionTests.isBlank_ShouldReturnTrueForNullOrBlankStringsVariableSource.executor": "Run",
+    "Gradle.ExpressionTests.testPostIncrementOperator.executor": "Debug",
+    "Gradle.ExpressionTests.testPostIncrementPlusOperator.executor": "Run",
+    "Gradle.ExpressionTests.testPreIncrementMinusOperator.executor": "Debug",
+    "Gradle.ExpressionTests.testPreIncrementPlusOperator.executor": "Run",
     "Gradle.ExpressionTree.testSimpleExpressionTree.executor": "Run",
     "Gradle.ExpressionTreeTests.executor": "Run",
     "Gradle.ExpressionTreeTests.testComplexExpressionTreeMinus.executor": "Debug",
@@ -97,9 +108,18 @@
     "Gradle.ExpressionTreeTests.testSimpleExpressionWithParentheses.executor": "Run",
     "Gradle.ExpressionTreeTests.testSingleValueExpression.executor": "Run",
     "Gradle.ExpressionTreeTests.testWithStack.executor": "Run",
+    "Gradle.ExpressionsWithVariablesCalculatorTests.executor": "Run",
+    "Gradle.ExpressionsWithVariablesCalculatorTests.testEquationSystemWithThreeEquationsWhenJustOneHasAnImmediateValueAndSolutionsAreDependent.executor": "Debug",
+    "Gradle.ExpressionsWithVariablesCalculatorTests.testEquationSystemWithTwoEquationsWhenJustFirstHasAnImmediateValue.executor": "Debug",
+    "Gradle.ExpressionsWithVariablesCalculatorTests.testEquationWithImmediateValuesOnly.executor": "Debug",
+    "Gradle.ExpressionsWithVariablesCalculatorTests.testEquationsWithPreAndPostIncrementOperators.executor": "Run",
+    "Gradle.ExpressionsWithVariablesCalculatorTests.testExample.executor": "Run",
     "Gradle.ExpressionsWithVariablesCalculatorTests.testOneEquation.executor": "Debug",
     "Gradle.TabiikaTechSecond [:Main.main()].executor": "Run",
-    "Gradle.TaboolaTechTwo [:Main.main()].executor": "Run",
+    "Gradle.TaboolaTechTwo [:Main.main()].executor": "Debug",
+    "Gradle.TaboolaTechTwo [jacocoTestCoverageVerification].executor": "Run",
+    "Gradle.TaboolaTechTwo [jacocoTestReport].executor": "Run",
+    "Gradle.Tests in 'TaboolaTechSecond.test'.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -112,26 +132,13 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.sourceCode.Java",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.ExpressionTests">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.Main" />
-      <module name="TaboolaTechSecond.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Gradle.ExpressionsWithVariablesCalculatorTests.testExample">
     <configuration name="ExpressionTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -156,7 +163,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="ExpressionTests.isBlank_ShouldReturnTrueForNullOrBlankStringsVariableSource" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ExpressionTests.testPreIncrementMinusOperator" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -169,7 +176,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ExpressionTests.isBlank_ShouldReturnTrueForNullOrBlankStringsVariableSource&quot;" />
+            <option value="&quot;ExpressionTests.testPreIncrementMinusOperator&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -180,7 +187,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="ExpressionTreeTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ExpressionsWithVariablesCalculatorTests.testEquationsWithPreAndPostIncrementOperators" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -193,7 +200,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ExpressionTreeTests&quot;" />
+            <option value="&quot;ExpressionsWithVariablesCalculatorTests.testEquationsWithPreAndPostIncrementOperators&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -204,7 +211,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="ExpressionsWithVariablesCalculatorTests.testOneEquation" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ExpressionsWithVariablesCalculatorTests.testExample" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -217,7 +224,29 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ExpressionsWithVariablesCalculatorTests.testOneEquation&quot;" />
+            <option value="&quot;ExpressionsWithVariablesCalculatorTests.testExample&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'TaboolaTechSecond.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -230,11 +259,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ExpressionsWithVariablesCalculatorTests.testExample" />
+        <item itemvalue="Gradle.Tests in 'TaboolaTechSecond.test'" />
+        <item itemvalue="Gradle.ExpressionsWithVariablesCalculatorTests.testEquationsWithPreAndPostIncrementOperators" />
         <item itemvalue="Gradle.ExpressionTests" />
-        <item itemvalue="Gradle.ExpressionTests.isBlank_ShouldReturnTrueForNullOrBlankStringsVariableSource" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Gradle.ExpressionsWithVariablesCalculatorTests.testOneEquation" />
-        <item itemvalue="Gradle.ExpressionTreeTests" />
+        <item itemvalue="Gradle.ExpressionTests.testPreIncrementMinusOperator" />
       </list>
     </recent_temporary>
   </component>
@@ -259,7 +288,7 @@
       <workItem from="1709278850432" duration="4548000" />
       <workItem from="1709283464494" duration="9902000" />
       <workItem from="1709302106613" duration="9887000" />
-      <workItem from="1709370315424" duration="5972000" />
+      <workItem from="1709370315424" duration="23101000" />
     </task>
     <servers />
   </component>
@@ -271,22 +300,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>7</line>
+          <line>15</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/TreeNode.java</url>
-          <line>98</line>
+          <line>97</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/TreeNode.java</url>
-          <line>96</line>
+          <line>95</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/TreeNode.java</url>
-          <line>72</line>
+          <line>71</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -295,26 +324,58 @@
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/ExpressionTreeTests.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="75" />
+          <url>file://$PROJECT_DIR$/src/test/java/ExpressionTests.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/EquationSolver.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="93" />
+          <url>file://$PROJECT_DIR$/src/test/java/ExpressionsWithVariablesCalculatorTests.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/ExpressionsWithVariablesCalculatorTests.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="121" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/ExpressionTests.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="94" />
+          <line>47</line>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/ExpressionsWithVariablesCalculatorTests.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/ExpressionsWithVariablesCalculatorTests.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="147" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/ExpressionsWithVariablesCalculatorTests.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="148" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Equation.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/ExpressionsWithVariablesCalculatorTests.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="157" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="java.util.regex.Matcher" memberName="parentPattern" />
         <PinnedItemInfo parentTag="org.example.TreeNode" memberName="rightOperand" />
         <PinnedItemInfo parentTag="org.example.TreeNode" memberName="leftOperand" />
+        <PinnedItemInfo parentTag="java.util.regex.Matcher" memberName="groups" />
       </pinned-members>
     </pin-to-top-manager>
   </component>

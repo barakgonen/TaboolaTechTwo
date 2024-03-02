@@ -39,7 +39,6 @@ public class TreeNode {
             String[] splitExpression = expression.split(" ");
 
             if (isSograim(expression)) {
-                System.out.println("YO expression is: " + expression);
                 int sograimBegin = expression.lastIndexOf("(");
                 int sograimEnd = expression.indexOf(")");
                 if (sograimBegin > 0) {
