@@ -8,8 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 
-import static org.example.Constants.PATTERN;
-import static org.example.Constants.SUPPORTED_OPERATORS;
+import static org.example.Constants.*;
 
 
 public class Equation {
@@ -50,7 +49,8 @@ public class Equation {
     private boolean isSolutionImmediate() {
         for (int i = 0; i < this.expressionStr.length(); i++) {
             if (!(Character.isDigit(expressionStr.charAt(i))
-                    || SUPPORTED_OPERATORS.containsKey(String.valueOf(expressionStr.charAt(i)))
+                    || PRIORITIZED_OPERATORS.containsKey(String.valueOf(expressionStr.charAt(i)))
+                    || NON_PRIORITIZED_OPERATORS.containsKey(String.valueOf(expressionStr.charAt(i)))
                     || expressionStr.charAt(i) == ')'
                     || expressionStr.charAt(i) == '('
                     || expressionStr.charAt(i) == ' ')) {
@@ -91,8 +91,8 @@ public class Equation {
                     LOGGER.error("Not familiar with requested assignmentOperator: {}", assignmentOperator);
                     return Optional.empty();
             }
-            return Optional.of(new EquationSolution(variable, this.calculatedResults.get(variable)));
 
+            return Optional.of(new EquationSolution(variable, this.calculatedResults.get(variable)));
         } catch (Exception e) {
             LOGGER.error("Caught an exception during trying to solve the equation: ", e);
         }

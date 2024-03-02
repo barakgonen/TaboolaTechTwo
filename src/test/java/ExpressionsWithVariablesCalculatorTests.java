@@ -118,7 +118,8 @@ public class ExpressionsWithVariablesCalculatorTests {
 
     @Test
     public void testGeneratedSystem() throws InvalidSyntaxException {
-        List<String> equationSystem = List.of("a = 0",
+        List<String> equationSystem = List.of(
+                "a = 0",
                 "b = ++a",
                 "c = a++ + 5",
                 "d = (c + 3) * 10",
@@ -147,46 +148,49 @@ public class ExpressionsWithVariablesCalculatorTests {
                 "aa = z - 3",
                 "ab = aa + 6",
                 "ac = ab - 5",
-                "ad = ac * 2");
+                "ad = ac * 2"
+        );
 
         EquationSolver equationSolver = new EquationSolver(equationSystem);
 
         Map<String, Long> solvedEquation = equationSolver.solve();
 
-        Map<String, Integer> expectedValues = Stream.of(
-                new AbstractMap.SimpleImmutableEntry<>("a", 0),
-                new AbstractMap.SimpleImmutableEntry<>("b", 1),
-                new AbstractMap.SimpleImmutableEntry<>("c", 6),
-                new AbstractMap.SimpleImmutableEntry<>("d", 90),
-                new AbstractMap.SimpleImmutableEntry<>("e", 89),
-                new AbstractMap.SimpleImmutableEntry<>("f", 91),
-                new AbstractMap.SimpleImmutableEntry<>("g", 46),
-                new AbstractMap.SimpleImmutableEntry<>("h", 47),
-                new AbstractMap.SimpleImmutableEntry<>("i", 53),
-                new AbstractMap.SimpleImmutableEntry<>("j", 159),
-                new AbstractMap.SimpleImmutableEntry<>("k", 79),
-                new AbstractMap.SimpleImmutableEntry<>("l", 75),
-                new AbstractMap.SimpleImmutableEntry<>("m", 375),
-                new AbstractMap.SimpleImmutableEntry<>("n", 1125),
-                new AbstractMap.SimpleImmutableEntry<>("o", 562),
-                new AbstractMap.SimpleImmutableEntry<>("p", 563),
-                new AbstractMap.SimpleImmutableEntry<>("q", 560),
-                new AbstractMap.SimpleImmutableEntry<>("r", 1120),
-                new AbstractMap.SimpleImmutableEntry<>("s", 1127),
-                new AbstractMap.SimpleImmutableEntry<>("t", 563),
-                new AbstractMap.SimpleImmutableEntry<>("u", 566),
-                new AbstractMap.SimpleImmutableEntry<>("v", 2264),
-                new AbstractMap.SimpleImmutableEntry<>("w", 4524),
-                new AbstractMap.SimpleImmutableEntry<>("x", 4529),
-                new AbstractMap.SimpleImmutableEntry<>("y", 4539),
-                new AbstractMap.SimpleImmutableEntry<>("z", 2269),
-                new AbstractMap.SimpleImmutableEntry<>("aa", 2266),
-                new AbstractMap.SimpleImmutableEntry<>("ab", 2272),
-                new AbstractMap.SimpleImmutableEntry<>("ac", 2267),
-                new AbstractMap.SimpleImmutableEntry<>("ad", 4534))
+        Map<String, Long> expectedValues = Stream.of(
+                        new AbstractMap.SimpleImmutableEntry<>("a", 2L),
+                        new AbstractMap.SimpleImmutableEntry<>("b", 1L),
+                        new AbstractMap.SimpleImmutableEntry<>("c", 6L),
+                        new AbstractMap.SimpleImmutableEntry<>("d", 90L),
+                        new AbstractMap.SimpleImmutableEntry<>("e", 89L),
+                        new AbstractMap.SimpleImmutableEntry<>("f", 91L),
+                        new AbstractMap.SimpleImmutableEntry<>("g", 46L),
+                        new AbstractMap.SimpleImmutableEntry<>("h", 47L),
+                        new AbstractMap.SimpleImmutableEntry<>("i", 53L),
+                        new AbstractMap.SimpleImmutableEntry<>("j", 159L),
+                        new AbstractMap.SimpleImmutableEntry<>("k", 79L),
+                        new AbstractMap.SimpleImmutableEntry<>("l", 75L),
+                        new AbstractMap.SimpleImmutableEntry<>("m", 375L),
+                        new AbstractMap.SimpleImmutableEntry<>("n", 1131L),
+                        new AbstractMap.SimpleImmutableEntry<>("o", 565L),
+                        new AbstractMap.SimpleImmutableEntry<>("p", 566L),
+                        new AbstractMap.SimpleImmutableEntry<>("q", 563L),
+                        new AbstractMap.SimpleImmutableEntry<>("r", 1126L),
+                        new AbstractMap.SimpleImmutableEntry<>("s", 1133L),
+                        new AbstractMap.SimpleImmutableEntry<>("t", 567L),
+                        new AbstractMap.SimpleImmutableEntry<>("u", 569L),
+                        new AbstractMap.SimpleImmutableEntry<>("v", 2276L),
+                        new AbstractMap.SimpleImmutableEntry<>("w", 4548L),
+                        new AbstractMap.SimpleImmutableEntry<>("x", 4553L),
+                        new AbstractMap.SimpleImmutableEntry<>("y", 4563L),
+                        new AbstractMap.SimpleImmutableEntry<>("z", 2281L),
+                        new AbstractMap.SimpleImmutableEntry<>("aa", 2278L),
+                        new AbstractMap.SimpleImmutableEntry<>("ab", 2284L),
+                        new AbstractMap.SimpleImmutableEntry<>("ac", 2279L),
+                        new AbstractMap.SimpleImmutableEntry<>("ad", 4558L))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         Assertions.assertEquals(expectedValues.keySet().size(), solvedEquation.size());
-        System.out.println("BG");
+
+        expectedValues.forEach((key, value) -> Assertions.assertEquals(value, solvedEquation.get(key)));
+
     }
 }

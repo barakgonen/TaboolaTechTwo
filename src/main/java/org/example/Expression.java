@@ -13,7 +13,8 @@ import java.util.Stack;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-import static org.example.Constants.SUPPORTED_OPERATORS;
+import static org.example.Constants.NON_PRIORITIZED_OPERATORS;
+import static org.example.Constants.PRIORITIZED_OPERATORS;
 
 /**
  * Represents arithmetic expression.
@@ -21,8 +22,11 @@ import static org.example.Constants.SUPPORTED_OPERATORS;
  */
 public class Expression {
     private static final Logger LOGGER = LogManager.getLogger();
-    Map<String, Long> variableToResult;
-    String expressionToSolve;
+
+    private Map<String, Long> variableToResult;
+    private String expressionToSolve;
+    private Stack<String> input;
+    private Stack<String> temp;
 
     /**
      * Constructor for multi equation system solution
@@ -33,6 +37,8 @@ public class Expression {
     public Expression(Map<String, Long> variableToResult, String expressionToSolve) {
         this.variableToResult = variableToResult;
         this.expressionToSolve = expressionToSolve;
+        this.input = new Stack<>();
+        this.temp = new Stack<>();
     }
 
     /**
@@ -46,18 +52,8 @@ public class Expression {
 
     public Long solve() throws InvalidSyntaxException {
         LOGGER.debug("Trying to solve the following expression: {}", expressionToSolve);
-        /**
-         * 1 calculate all ()
-         * 2 calculate all * OR /
-         * 3 calculate all + OR -
-         *
-         */
 
         String modifiedExpression = modifyInputString();
-
-        Stack<String> input = new Stack<>();
-        Stack<String> temp = new Stack<>();
-
         LinkedHashMap<String, Long> tokensCounter = getMappings(modifiedExpression);
 
         if (containsParenthesis(tokensCounter)) {
@@ -67,6 +63,66 @@ public class Expression {
         }
         input.addAll(Arrays.asList(modifiedExpression.split(" ")));
 
+        // STEP 1 - handle b
+        parenthesis();
+
+        // STEP 2 - calculate * and /   -> prioritized operators
+        handlePrioritizedOperators();
+
+        // STEP 3 - calculate + and -   -> regular operators
+        handleRegularOperators();
+
+        var calculatedValue = input.pop();
+        if (isPostIncrementOperator(expressionToSolve)) {
+            return runPostOperator(expressionToSolve);
+        } else if (isPreIncrementOperator(expressionToSolve)) {
+            return runPreOperator(expressionToSolve);
+        } else if (variableToResult.containsKey(calculatedValue)) {
+            return variableToResult.get(calculatedValue);
+        } else {
+            return Long.parseLong(calculatedValue);
+        }
+    }
+
+    private void handleRegularOperators() throws InvalidSyntaxException {
+        while (input.contains("+") || input.contains("-")) { // TODO: set to prioritized ops
+            // PREPARE TMP
+            while (!input.isEmpty()) {
+                temp.add(input.pop());
+            }
+            // HANDLE PARENTHESIS
+            while (!temp.isEmpty() && !temp.peek().equals("+") && !temp.peek().equals("-")) { // one of non, think about adding a method
+                input.add(temp.pop());
+            }
+
+            calculateExpression(NON_PRIORITIZED_OPERATORS.get(temp.pop()));
+
+            while (!temp.isEmpty()) {
+                input.add(temp.pop());
+            }
+        }
+    }
+
+    private void handlePrioritizedOperators() throws InvalidSyntaxException {
+        while (input.contains("*") || input.contains("/")) { // TODO: set to prioritized ops
+            // PREPARE TMP
+            while (!input.isEmpty()) {
+                temp.add(input.pop());
+            }
+            // HANDLE PARENTHESIS
+            while (!temp.isEmpty() && !temp.peek().equals("*") && !temp.peek().equals("/")) { // TODO: one of prioritized
+                input.add(temp.pop());
+            }
+
+            calculateExpression(PRIORITIZED_OPERATORS.get(temp.pop()));
+
+            while (!temp.isEmpty()) {
+                input.add(temp.pop());
+            }
+        }
+    }
+
+    private void parenthesis() throws InvalidSyntaxException {
         while (input.contains("(") && input.contains(")")) {
             // PREPARE TMP
             while (!input.isEmpty()) {
@@ -99,118 +155,12 @@ public class Expression {
                 input.add(temp.pop());
             }
         }
+    }
 
-
-        // STEP 2 - calculate * and /   -> prioritized operators
-        while (input.contains("*") || input.contains("/")) { // TODO: set to prioritized ops
-            // PREPARE TMP
-            while (!input.isEmpty()) {
-                temp.add(input.pop());
-            }
-            // HANDLE PARENTHESIS
-            while (!temp.isEmpty() && !temp.peek().equals("*") && !temp.peek().equals("/")) {
-                input.add(temp.pop());
-            }
-
-            if (temp.peek().equals("*")) {
-                temp.pop();
-                input.add(String.valueOf(Integer.parseInt(input.pop()) * Integer.parseInt(temp.pop())));
-            } else if (temp.peek().equals("/")) {
-                temp.pop();
-                input.add(String.valueOf(Integer.parseInt(input.pop()) / Integer.parseInt(temp.pop())));
-            } else {
-                LOGGER.error("BG BUG");
-            }
-
-            while (!temp.isEmpty()) {
-                input.add(temp.pop());
-            }
-        }
-
-
-        // STEP 3 - calculate + and -   -> regular operators
-        while (input.contains("+") || input.contains("-")) { // TODO: set to prioritized ops
-            // PREPARE TMP
-            while (!input.isEmpty()) {
-                temp.add(input.pop());
-            }
-            // HANDLE PARENTHESIS
-            while (!temp.isEmpty() && !temp.peek().equals("+") && !temp.peek().equals("-")) {
-                input.add(temp.pop());
-            }
-
-            if (temp.peek().equals("+")) {
-                temp.pop();
-                String lhs = input.pop();
-                String rhs = temp.pop();
-                input.add(String.valueOf(getCalculatedValue(lhs, rhs, SUPPORTED_OPERATORS.get("+"))));
-            } else if (temp.peek().equals("-")) {
-                temp.pop();
-                input.add(String.valueOf(Integer.parseInt(input.pop()) - Integer.parseInt(temp.pop())));
-            } else {
-                LOGGER.error("BG BUG");
-            }
-
-            while (!temp.isEmpty()) {
-                input.add(temp.pop());
-            }
-        }
-
-        var v = input.pop();
-        if (isPostIncrementOperator(expressionToSolve)) {
-            if (expressionToSolve.contains("++")) {
-                var value = expressionToSolve.split("\\+\\+")[0];
-
-                if (variableToResult.containsKey(value)) {
-                    Long valueToReturn = variableToResult.get(value);
-                    variableToResult.put(value, valueToReturn + 1);
-
-                    return valueToReturn;
-                } else {
-                    throw new InvalidSyntaxException("The following expression is invalid: " + expressionToSolve + ", since we can't use post increment operator in an immediate values");
-                }
-            } else if (expressionToSolve.contains("--")) {
-                var value = expressionToSolve.split("\\-\\-")[0];
-
-                if (variableToResult.containsKey(value)) {
-                    Long valueToReturn = variableToResult.get(value);
-                    variableToResult.put(value, valueToReturn - 1);
-
-                    return valueToReturn;
-                } else {
-                    throw new InvalidSyntaxException("The following expression is invalid: " + expressionToSolve + ", since we can't use post increment operator in an immediate values");
-                }
-            } else {
-                throw new InvalidSyntaxException("Detected pre increment operator, but with no support, expression is: " + expressionToSolve);
-            }
-        } else if (isPreIncrementOperator(expressionToSolve)) {
-            if (expressionToSolve.contains("++")) {
-                var value = expressionToSolve.split("\\+\\+")[1];
-                if (variableToResult.containsKey(value)) {
-                    variableToResult.put(value, variableToResult.get(value) + 1);
-
-                    return variableToResult.get(value);
-                } else {
-                    throw new InvalidSyntaxException("The following expression is invalid: " + expressionToSolve + ", since we can't use post increment operator in an immediate values");
-                }
-            } else if (expressionToSolve.contains("--")) {
-                var value = expressionToSolve.split("\\-\\-")[1];
-                if (variableToResult.containsKey(value)) {
-                    variableToResult.put(value, variableToResult.get(value) - 1);
-
-                    return variableToResult.get(value);
-                } else {
-                    throw new InvalidSyntaxException("The following expression is invalid: " + expressionToSolve + ", since we can't use post increment operator in an immediate values");
-                }
-            } else {
-                throw new InvalidSyntaxException("Detected pre increment operator, but with no support, expression is: " + expressionToSolve);
-            }
-
-        } else if (variableToResult.containsKey(v)) {
-            return variableToResult.get(v);
-        } else {
-            return Long.parseLong(v);
-        }
+    private void calculateExpression(BiFunction<Number, Number, Number> function) throws InvalidSyntaxException {
+        String lhs = input.pop();
+        String rhs = temp.pop();
+        input.add(String.valueOf(getCalculatedValue(lhs, rhs, function)));
     }
 
     private Long runPostOperator(String variable) throws InvalidSyntaxException {
@@ -307,14 +257,19 @@ public class Expression {
         return (Integer) function.apply(leftOperand, rightOperand);
     }
 
-    private Integer evaluateExpression(List<String> tokens) {
+    private Integer evaluateExpression(List<String> tokens) throws InvalidSyntaxException {
         var v = tokens
                 .stream()
-                .filter(s -> !(s.equals("(") || s.equals(")") || SUPPORTED_OPERATORS.containsKey(s)))
+                .filter(s -> !(s.equals("(") || s.equals(")") || PRIORITIZED_OPERATORS.containsKey(s) || NON_PRIORITIZED_OPERATORS.containsKey(s)))
                 .toList();
 
-        return SUPPORTED_OPERATORS.get(tokens.stream().filter(s -> SUPPORTED_OPERATORS.containsKey(s)).findFirst().get())
-                .apply(Integer.parseInt(v.get(0)), Integer.parseInt(v.get(1))).intValue();
+        var operator = tokens.stream().filter(s -> PRIORITIZED_OPERATORS.containsKey(s) || NON_PRIORITIZED_OPERATORS.containsKey(s)).findFirst().get();
+
+        if (PRIORITIZED_OPERATORS.containsKey(operator)) {
+            return getCalculatedValue(v.get(0), v.get(1), PRIORITIZED_OPERATORS.get(operator));
+        } else {
+            return getCalculatedValue(v.get(0), v.get(1), NON_PRIORITIZED_OPERATORS.get(operator));
+        }
     }
 
     private String modifyInputString() {

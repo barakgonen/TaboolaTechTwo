@@ -5,22 +5,17 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 public class EquationSolver {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private List<String> input;
     private Map<String, Long> calculatedResults;
-    private List<AbstractSyntaxTree> expressions;
     private Collection<Equation> equations;
 
     public EquationSolver(List<String> input) throws InvalidSyntaxException {
@@ -33,8 +28,6 @@ public class EquationSolver {
     }
 
     public Map<String, Long> solve() {
-
-        // TODO First iteration for immediate values only!
         List<CompletableFuture<Optional<EquationSolution>>> immediateSolutions = this.equations.stream()
                 .filter(Equation::hasImmediateSolution)
                 .map(equation -> CompletableFuture.supplyAsync(equation::solve))
