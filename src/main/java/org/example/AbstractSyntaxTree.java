@@ -2,9 +2,6 @@ package org.example;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-
-import static org.example.Constants.SUPPORTED_OPERATORS;
 
 /**
  * AST - represents abstract syntax tree
