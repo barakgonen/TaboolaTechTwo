@@ -15,6 +15,7 @@ public final class Constants {
     public static Map<String, BiFunction<Number, Number, Number>> NON_PRIORITIZED_OPERATORS = new HashMap<>() {{
         put("+", (number, number2) -> number.intValue() + number2.intValue());
         put("-", (number, number2) -> number.intValue() - number2.intValue());
+        put("^", (number, number2) -> (int)Math.pow(number.intValue(), number2.intValue()));
     }};
 
     public static final Pattern PATTERN = Pattern.compile("([a-zA-Z]+)\\s*([+\\-*/%&|^]?=)\\s*(.*)");
