@@ -11,6 +11,15 @@ import java.util.regex.Matcher;
 import static org.example.Constants.*;
 
 
+/**
+ * Class which represents single equation.
+ * Equation is built by 3 parts:
+ * destination variable
+ * assignment operator
+ * expression
+ *
+ * for example:    y = (5 + x) - 4
+ */
 public class Equation {
 
     private static final Logger LOGGER = LogManager.getLogger();

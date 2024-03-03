@@ -145,7 +145,7 @@ public class Expression {
         }
     }
 
-    private Integer evaluateExpression(List<String> tokens) throws InvalidSyntaxException {
+    private Long evaluateExpression(List<String> tokens) throws InvalidSyntaxException {
         var v = tokens
                 .stream()
                 .filter(s -> !(s.equals("(") || s.equals(")") || PRIORITIZED_OPERATORS.containsKey(s) || NON_PRIORITIZED_OPERATORS.containsKey(s)))
@@ -220,38 +220,29 @@ public class Expression {
         return expr.startsWith("++") || expr.startsWith("--");
     }
 
-    private Integer getCalculatedValue(String lhs, String rhs, BiFunction<Number, Number, Number> function) throws InvalidSyntaxException {
-        Long leftOperand = null;
+    private Long getValue(String expression) throws InvalidSyntaxException {
+        Long value = null;
         try {
-            leftOperand = Long.parseLong(lhs);
+            value = Long.parseLong(expression);
         } catch (NumberFormatException e) {
-            if (variableToResult.containsKey(lhs)) {
-                leftOperand = variableToResult.get(lhs);
-            } else if (isPreIncrementOperator(lhs)) {
-                leftOperand = runPreOperator(lhs);
-            } else if (isPostIncrementOperator(lhs)) {
-                leftOperand = runPostOperator(lhs);
+            if (variableToResult.containsKey(expression)) {
+                value = variableToResult.get(expression);
+            } else if (isPreIncrementOperator(expression)) {
+                value = runPreOperator(expression);
+            } else if (isPostIncrementOperator(expression)) {
+                value = runPostOperator(expression);
             } else {
-                LOGGER.error("Couldn't translate the following value: {} to a number and it's not known variable", lhs);
+                LOGGER.error("Couldn't translate the following value: {} to a number and it's not known variable", expression);
             }
         }
 
-        Long rightOperand = null;
-        try {
-            rightOperand = Long.parseLong(rhs);
-        } catch (NumberFormatException e) {
-            if (variableToResult.containsKey(rhs)) {
-                rightOperand = variableToResult.get(rhs);
-            } else if (isPreIncrementOperator(rhs)) {
-                rightOperand = runPreOperator(rhs);
-            } else if (isPostIncrementOperator(rhs)) {
-                rightOperand = runPostOperator(rhs);
-            } else {
-                LOGGER.error("Couldn't translate the following value: {} to a number and it's not known variable", lhs);
-            }
-        }
+        return value;
+    }
+    private Long getCalculatedValue(String lhs, String rhs, BiFunction<Number, Number, Number> function) throws InvalidSyntaxException {
+        Long leftOperand = getValue(lhs);
+        Long rightOperand = getValue(rhs);
 
-        return (Integer) function.apply(leftOperand, rightOperand);
+        return function.apply(leftOperand, rightOperand).longValue();
     }
 
     private String modifyInputString() {

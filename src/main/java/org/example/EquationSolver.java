@@ -11,6 +11,9 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Class which gets as parameter list of equations as string and handles calculation process
+ */
 public class EquationSolver {
     private static final Logger LOGGER = LogManager.getLogger();
 
