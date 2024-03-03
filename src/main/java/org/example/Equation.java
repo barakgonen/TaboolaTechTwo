@@ -71,6 +71,7 @@ public class Equation {
             Long result = expression.solve();
             this.isSolved = true;
 
+            // TODO: move to Constants with function, the same as operators
             switch (assignmentOperator) {
                 case "=":
                     this.calculatedResults.put(variable, result);

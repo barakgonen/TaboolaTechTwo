@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,10 +24,10 @@ import static org.example.Constants.PRIORITIZED_OPERATORS;
 public class Expression {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private Map<String, Long> variableToResult;
-    private String expressionToSolve;
-    private Stack<String> input;
-    private Stack<String> temp;
+    private final Map<String, Long> variableToResult;
+    private final String expressionToSolve;
+    private final Stack<String> input;
+    private final Stack<String> temp;
 
     /**
      * Constructor for multi equation system solution
@@ -67,10 +68,10 @@ public class Expression {
         parenthesis();
 
         // STEP 2 - calculate * and /   -> prioritized operators
-        handlePrioritizedOperators();
+        evaluateExpressionWithPredefinedOperators(PRIORITIZED_OPERATORS);
 
         // STEP 3 - calculate + and -   -> regular operators
-        handleRegularOperators();
+        evaluateExpressionWithPredefinedOperators(NON_PRIORITIZED_OPERATORS);
 
         var calculatedValue = input.pop();
         if (isPostIncrementOperator(expressionToSolve)) {
@@ -84,18 +85,18 @@ public class Expression {
         }
     }
 
-    private void handleRegularOperators() throws InvalidSyntaxException {
-        while (input.contains("+") || input.contains("-")) { // TODO: set to prioritized ops
+    private void evaluateExpressionWithPredefinedOperators(Map<String, BiFunction<Number, Number, Number>> operatorsToFunc) throws InvalidSyntaxException {
+        while (!Collections.disjoint(input, operatorsToFunc.keySet())) {
             // PREPARE TMP
             while (!input.isEmpty()) {
                 temp.add(input.pop());
             }
             // HANDLE PARENTHESIS
-            while (!temp.isEmpty() && !temp.peek().equals("+") && !temp.peek().equals("-")) { // one of non, think about adding a method
+            while (!temp.isEmpty() && !operatorsToFunc.containsKey(temp.peek())) {
                 input.add(temp.pop());
             }
 
-            calculateExpression(NON_PRIORITIZED_OPERATORS.get(temp.pop()));
+            calculateExpression(operatorsToFunc.get(temp.pop()));
 
             while (!temp.isEmpty()) {
                 input.add(temp.pop());
@@ -103,23 +104,10 @@ public class Expression {
         }
     }
 
-    private void handlePrioritizedOperators() throws InvalidSyntaxException {
-        while (input.contains("*") || input.contains("/")) { // TODO: set to prioritized ops
-            // PREPARE TMP
-            while (!input.isEmpty()) {
-                temp.add(input.pop());
-            }
-            // HANDLE PARENTHESIS
-            while (!temp.isEmpty() && !temp.peek().equals("*") && !temp.peek().equals("/")) { // TODO: one of prioritized
-                input.add(temp.pop());
-            }
-
-            calculateExpression(PRIORITIZED_OPERATORS.get(temp.pop()));
-
-            while (!temp.isEmpty()) {
-                input.add(temp.pop());
-            }
-        }
+    private void calculateExpression(BiFunction<Number, Number, Number> function) throws InvalidSyntaxException {
+        String lhs = input.pop();
+        String rhs = temp.pop();
+        input.add(String.valueOf(getCalculatedValue(lhs, rhs, function)));
     }
 
     private void parenthesis() throws InvalidSyntaxException {
@@ -157,10 +145,19 @@ public class Expression {
         }
     }
 
-    private void calculateExpression(BiFunction<Number, Number, Number> function) throws InvalidSyntaxException {
-        String lhs = input.pop();
-        String rhs = temp.pop();
-        input.add(String.valueOf(getCalculatedValue(lhs, rhs, function)));
+    private Integer evaluateExpression(List<String> tokens) throws InvalidSyntaxException {
+        var v = tokens
+                .stream()
+                .filter(s -> !(s.equals("(") || s.equals(")") || PRIORITIZED_OPERATORS.containsKey(s) || NON_PRIORITIZED_OPERATORS.containsKey(s)))
+                .toList();
+
+        var operator = tokens.stream().filter(s -> PRIORITIZED_OPERATORS.containsKey(s) || NON_PRIORITIZED_OPERATORS.containsKey(s)).findFirst().get();
+
+        if (PRIORITIZED_OPERATORS.containsKey(operator)) {
+            return getCalculatedValue(v.get(0), v.get(1), PRIORITIZED_OPERATORS.get(operator));
+        } else {
+            return getCalculatedValue(v.get(0), v.get(1), NON_PRIORITIZED_OPERATORS.get(operator));
+        }
     }
 
     private Long runPostOperator(String variable) throws InvalidSyntaxException {
@@ -255,21 +252,6 @@ public class Expression {
         }
 
         return (Integer) function.apply(leftOperand, rightOperand);
-    }
-
-    private Integer evaluateExpression(List<String> tokens) throws InvalidSyntaxException {
-        var v = tokens
-                .stream()
-                .filter(s -> !(s.equals("(") || s.equals(")") || PRIORITIZED_OPERATORS.containsKey(s) || NON_PRIORITIZED_OPERATORS.containsKey(s)))
-                .toList();
-
-        var operator = tokens.stream().filter(s -> PRIORITIZED_OPERATORS.containsKey(s) || NON_PRIORITIZED_OPERATORS.containsKey(s)).findFirst().get();
-
-        if (PRIORITIZED_OPERATORS.containsKey(operator)) {
-            return getCalculatedValue(v.get(0), v.get(1), PRIORITIZED_OPERATORS.get(operator));
-        } else {
-            return getCalculatedValue(v.get(0), v.get(1), NON_PRIORITIZED_OPERATORS.get(operator));
-        }
     }
 
     private String modifyInputString() {
